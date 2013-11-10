@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="author" content="Jose Andres Ayestaran">
+
+	<title>{% block title %}GPRS{% endblock title %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- BOOTSTRAP -->
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- JQUERY -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" media="screen">
+</head>
+
+<body style="padding-top: 0px;">
+
+	<!-- MENU -->
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">GPRS</a>
+                <ul class="nav pull-right">
+					<li>
+						<a href="/">Tiempo Real</a>
+					</li>
+					<li class="divider-vertical"></li>
+                    <li>
+                        <a href="/stored/">Base de Datos</a>
+                    </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- CONTENT -->
+	<div class="container" style="padding-top:40px;">
+		{% block content %}
+		{% endblock content %}
+
+        <!-- BOOTSTRAP -->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+        {% block scripts %}
+        {% endblock %}
+        <!-- FOOTER -->
+        <div class="row-fluid">
+        </div>
+	</div>
+</body>
+</html>
