@@ -1,5 +1,5 @@
 //El SOCKET
-var socket = io.connect('http://server.drivetech.cl:22988');
+var socket = io.connect('http://54.204.30.71:5000');
 
 socket.on('connect', function () {
     //socket connected
@@ -7,8 +7,7 @@ socket.on('connect', function () {
 });
 
 socket.on('new data', function (data){
-    alert(data.toString());
-    attach_data(data);
+    attach_data(data['data']);
 });
 
 function attach_data(data){

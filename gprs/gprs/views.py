@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from settings import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_USER_PASSWORD, DATABASE_NAME
-from pymongo import Connection
+from pymongo import Connection, ASCENDING, DESCENDING
 
 
 def home(request):
@@ -33,8 +33,10 @@ def connect_to_mongo():
         connection = Connection(MONGO_HOST, MONGO_PORT)
         db = connection[DATABASE_NAME]
         db.authenticate(MONGO_USER, MONGO_USER_PASSWORD)
+        print("Authentication success")
         return db
     except:
+        print("Error connecting to mongoDB")
         db = None
         return db
 
@@ -45,8 +47,8 @@ def get_data(db):
     """
     data = []
     try:
-        coll = db['instruction']
-        gprs_list = coll.find({})
+        coll = db['gprs']
+        gprs_list = coll.find({}, sort=[("_id", DESCENDING)])
         for doc in gprs_list:
             date = doc['date']
             time = doc['time']
