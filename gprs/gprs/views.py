@@ -48,7 +48,7 @@ def export_to_excel(request):
 
         return response
     else:
-        return render_to_response('error.html', {'error': 'No hay datos para exportar'}, context_instance=RequestContext(request))
+        return render_to_response('error.html', {'message': 'No hay datos para exportar'}, context_instance=RequestContext(request))
 
 
 def connect_to_mongo():
