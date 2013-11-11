@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'gprs.views.home', name='home'),
     url(r'^stored/$', 'gprs.views.stored', name='stored'),
+    url(r'^export/$', 'gprs.views.export_to_excel', name='export_to_excel'),
     # url(r'^gprs/', include('gprs.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

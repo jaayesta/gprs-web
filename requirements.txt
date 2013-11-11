@@ -3,3 +3,4 @@ dj-database-url==0.2.1
 gunicorn==0.17.2
 mongoengine==0.8.4
 pymongo==2.6.3
+tablib==0.9.11

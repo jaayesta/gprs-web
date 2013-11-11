@@ -12,7 +12,7 @@
 
     <!-- BOOTSTRAP -->
 	<link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="{{STATIC_URL}}bootstrap/css/bootstrap-theme.css" rel="stylesheet">
 
     <!-- JQUERY -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
@@ -24,22 +24,28 @@
 <body style="padding-top: 0px;">
 
 	<!-- MENU -->
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="#">GPRS</a>
-                <ul class="nav pull-right">
-					<li>
-						<a href="/">Tiempo Real</a>
-					</li>
-					<li class="divider-vertical"></li>
-                    <li>
-                        <a href="/stored/">Base de Datos</a>
-                    </li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">GPRS</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Tiempo Real</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/stored/">Base de Datos</a></li>
+                </ul>
+            </div>
+        </div>
+	</nav>
 
 	<!-- CONTENT -->
 	<div class="container" style="padding-top:40px;">

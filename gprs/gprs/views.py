@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
+from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from settings import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_USER_PASSWORD, DATABASE_NAME
 from pymongo import Connection, ASCENDING, DESCENDING
-
+import tablib
 
 def home(request):
     """
@@ -23,6 +24,31 @@ def stored(request):
         data = None
         print("Error connection to mongo")
     return render_to_response('stored.html', {'data': data}, context_instance=RequestContext(request))
+
+
+def export_to_excel(request):
+    """
+    Devuelve un excel con todos los datos de la base de datos.
+    """
+    db = connect_to_mongo()
+    if db:
+        gprs = get_data(db)
+    else:
+        gprs = None
+        print("Error connection to mongo")
+    if gprs:
+        headers = ('Fecha', 'Hora', 'Dato')
+        data = []
+        data = tablib.Dataset(*data, headers=headers)
+        for obj in gprs:
+            data.append((obj['date'], obj['time'], obj['gprs']))
+
+        response = HttpResponse(data.xls, content_type='application/vnd.ms-excel;charset=utf-8')
+        response['Content-Disposition'] = "attachment; filename=gprs.xls"
+
+        return response
+    else:
+        return render_to_response('error.html', {'error': 'No hay datos para exportar'}, context_instance=RequestContext(request))
 
 
 def connect_to_mongo():

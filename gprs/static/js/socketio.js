@@ -1,5 +1,6 @@
 //El SOCKET
 var socket = io.connect('http://54.204.30.71:5000');
+var number = 0;
 
 socket.on('connect', function () {
     //socket connected
@@ -11,12 +12,19 @@ socket.on('new data', function (data){
 });
 
 function attach_data(data){
+    number++;
     var table=document.getElementById("gprs");
     var row=table.insertRow(0);
+    row.className = "success";
+    row.id = number.toString();
     var cell1=row.insertCell(0);
     var cell2=row.insertCell(1);
     cell1.innerHTML=get_time();
     cell2.innerHTML=data.toString();
+    setTimeout(function(){
+        var lastRowId = number.toString();
+        var lastRow = document.getElementById(lastRowId).removeAttribute("class");
+    },200);
 }
 
 function get_time(){
