@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -159,6 +159,8 @@ LOGGING = {
     }
 }
 
+LOGIN_REDIRECT_URL = '/admin_database/'
+
 # ---------- MongoDB ---------:
 #mongo dharma.mongohq.com:10047/app19334171 -u <user> -p<password>
 MONGO_HOST = 'dharma.mongohq.com'
@@ -166,3 +168,22 @@ MONGO_PORT = 10047
 MONGO_USER = 'pepe'
 MONGO_USER_PASSWORD = 'pepeneitor'
 DATABASE_NAME = 'app19334171'
+
+
+######## HEROKU ##########
+try:
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    STATIC_ROOT = 'staticfiles'
+except:
+    pass
+
+
+try:
+    from settings_local import *
+except:
+    pass

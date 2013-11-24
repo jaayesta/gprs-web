@@ -5,6 +5,7 @@ from django.template import RequestContext
 from settings import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_USER_PASSWORD, DATABASE_NAME
 from pymongo import Connection, ASCENDING, DESCENDING
 import tablib
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     """
@@ -50,6 +51,15 @@ def export_to_excel(request):
     else:
         return render_to_response('error.html', {'message': 'No hay datos para exportar'}, context_instance=RequestContext(request))
 
+@login_required
+def admin_database(request):
+    if not request.method == 'POST':
+        return render_to_response('admin.html', {'success': None }, context_instance=RequestContext(request))
+    else:
+        success = delete_data()
+        return render_to_response('admin.html', {'success': success}, context_instance=RequestContext(request))
+
+
 
 def connect_to_mongo():
     """
@@ -82,3 +92,16 @@ def get_data(db):
     except:
         print("Error getting data from mongodb")
     return data
+
+def delete_data():
+    db = connect_to_mongo()
+    if db:
+        try:
+            coll = db['gprs']
+            coll.remove()
+            return True
+        except:
+            print 'Error eliminando la informacion de la base de datos'
+            return False
+    else:
+        return False

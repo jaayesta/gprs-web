@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="panel panel-default" style="margin-top: 40px;">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Administrador de la Base de datos</div>
+        <div class="panel-body">
+            <form action="{% url 'admin_database' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Vaciar"/>
+            </form>
+        </div>
+    </div>
+    {% if success %}
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>Success!</strong>La base de datos se ha vaciado exitosamente.
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+
